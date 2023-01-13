@@ -23,16 +23,16 @@ func (g *Graph) BellmanFord(source int) ([]*Edge, []*big.Float) {
 
 	for i := 1; i < len(g.Nodes); i++ {
 		for _, edge := range g.Edges {
-			s := edge.Source
-			t := edge.Target
+			s := edge.Source.ID
+			t := edge.Target.ID
 			weight := edge.Weight
 
-			if dist[s.ID].Cmp(inf) != 0 && new(big.Float).Add(dist[s.ID], weight).Cmp(dist[t.ID]) < 0 {
-				dist[t.ID] = new(big.Float).Add(dist[s.ID], weight)
-				edge.Distance = dist[t.ID]
+			if dist[s].Cmp(inf) != 0 && new(big.Float).Add(dist[s], weight).Cmp(dist[t]) < 0 {
+				dist[t] = new(big.Float).Add(dist[s], weight)
+				edge.Distance = dist[t]
 				// sees[edge.Target] = edge.Source
 				// Seen - последний результирующий слайс
-				seen[t.ID-1] = edge
+				seen[t-1] = edge
 			}
 		}
 	}
@@ -41,8 +41,8 @@ func (g *Graph) BellmanFord(source int) ([]*Edge, []*big.Float) {
 }
 
 func (g *Graph) FindArbitrageLoop(source int) []int { // deprecated
-	pred, dist := g.BellmanFord(source)
-	return g.FindNegativeWeightCycle(pred, dist, source)
+	seen, dist := g.BellmanFord(source)
+	return g.FindNegativeWeightCycle(seen, dist, source)
 }
 
 func (g *Graph) FindNegativeWeightCycle(seen []*Edge, dist []*big.Float, source int) []int {
