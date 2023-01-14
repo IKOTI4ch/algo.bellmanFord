@@ -1,8 +1,8 @@
 package graph
 
 type Node struct {
-	ID   int
-	UUID string
+	Index int
+	UUID  string
 }
 
 type Nodes []*Node

@@ -6,7 +6,7 @@ import (
 
 type Edge struct {
 	Distance *big.Float
-	ID       int
+	Index    int
 	Source   *Node
 	Target   *Node
 	UUID     string
