@@ -3,9 +3,9 @@ package main
 import (
 	"context"
 	"fmt"
-	"github.com/RyanCarrier/dijkstra"
 	"github.com/cheggaaa/pb/v3"
 	"github.com/jackc/pgx/v5"
+	"graph/dijkstra"
 	"os"
 	"time"
 )
@@ -79,7 +79,7 @@ func main() {
 	if err != nil {
 		fmt.Println(err)
 	} else {
-		fmt.Println(best.Path)
+		fmt.Println(best)
 	}
 
 	duration := time.Now().Sub(start)
