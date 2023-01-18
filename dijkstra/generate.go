@@ -2,7 +2,7 @@ package dijkstra
 
 import "math/rand"
 
-//Generate generates file with the amount of nodes specified
+// Generate generates file with the amount of nodes specified
 func Generate(nodes int) Graph {
 	//	fmt.Println("Generating file "+filename+" with nodes ", nodes)
 	graph := Graph{}

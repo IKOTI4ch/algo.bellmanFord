@@ -14,7 +14,7 @@ import (
 	mmg "github.com/mattomatic/dijkstra/graph"
 )
 
-//pq "github.com/Professorq/dijkstra"
+//pq "github.com/Professorq/dij"
 
 func TestNoPath(t *testing.T) {
 	testSolution(t, BestPath{}, ErrNoPath, "testdata/I.txt", 0, 4, true, -1)

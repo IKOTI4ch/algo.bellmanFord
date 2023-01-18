@@ -10,7 +10,7 @@ type dijkstraList interface {
 	Len() int
 }
 
-//PriorityQueueNewShort creates a new priority queue for short solving
+// PriorityQueueNewShort creates a new priority queue for short solving
 func priorityQueueNewShort() dijkstraList {
 	l := &priorityQueueWrapper{new(priorityQueueShort)}
 	n := l.Len()
@@ -20,7 +20,7 @@ func priorityQueueNewShort() dijkstraList {
 	return l
 }
 
-//PriorityQueueNewLong creates a new priority queue for long solving
+// PriorityQueueNewLong creates a new priority queue for long solving
 func priorityQueueNewLong() dijkstraList {
 	l := &priorityQueueWrapper{new(priorityQueueLong)}
 	n := l.Len()

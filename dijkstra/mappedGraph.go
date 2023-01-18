@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-//GetMapped gets the key assosciated with the mapped int
+// GetMapped gets the key assosciated with the mapped int
 func (g *Graph) GetMapped(a int) (string, error) {
 	if !g.usingMap || g.mapping == nil {
 		return "", errors.New("Map is not being used/initialised")
@@ -18,7 +18,7 @@ func (g *Graph) GetMapped(a int) (string, error) {
 	return "", errors.New(fmt.Sprint(a, " not found in mapping"))
 }
 
-//GetMapping gets the index associated with the specified key
+// GetMapping gets the index associated with the specified key
 func (g *Graph) GetMapping(a string) (int, error) {
 	if !g.usingMap || g.mapping == nil {
 		return -1, errors.New("Map is not being used/initialised")
@@ -29,7 +29,7 @@ func (g *Graph) GetMapping(a string) (int, error) {
 	return -1, errors.New(fmt.Sprint(a, " not found in mapping"))
 }
 
-//AddMappedVertex adds a new Vertex with a mapped ID (or returns the index if
+// AddMappedVertex adds a new Vertex with a mapped ID (or returns the index if
 // ID already exists).
 func (g *Graph) AddMappedVertex(ID string) int {
 	if !g.usingMap || g.mapping == nil {
@@ -46,13 +46,13 @@ func (g *Graph) AddMappedVertex(ID string) int {
 	return g.AddVertex(i).ID
 }
 
-//AddMappedArc adds a new Arc from Source to Destination, for when verticies are
+// AddMappedArc adds a new Arc from Source to Destination, for when verticies are
 // referenced by strings.
 func (g *Graph) AddMappedArc(Source, Destination string, Distance int64) error {
 	return g.AddArc(g.AddMappedVertex(Source), g.AddMappedVertex(Destination), Distance)
 }
 
-//AddArc is the default method for adding an arc from a Source Vertex to a
+// AddArc is the default method for adding an arc from a Source Vertex to a
 // Destination Vertex
 func (g *Graph) AddArc(Source, Destination int, Distance int64) error {
 	if len(g.Verticies) <= Source || len(g.Verticies) <= Destination {
@@ -62,7 +62,7 @@ func (g *Graph) AddArc(Source, Destination int, Distance int64) error {
 	return nil
 }
 
-//RemoveArc removes and arc from the Source vertex to the Destination vertex
+// RemoveArc removes and arc from the Source vertex to the Destination vertex
 // fails if either vertex doesn't exist, but will succeed if destination is
 // not an arc of Source (as a nop)
 func (g *Graph) RemoveArc(Source, Destination int) error {

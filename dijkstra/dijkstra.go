@@ -4,12 +4,12 @@ import (
 	"math"
 )
 
-//Shortest calculates the shortest path from src to dest
+// Shortest calculates the shortest path from src to dest
 func (g *Graph) Shortest(src, dest int) (BestPath, error) {
 	return g.evaluate(src, dest, true)
 }
 
-//Longest calculates the longest path from src to dest
+// Longest calculates the longest path from src to dest
 func (g *Graph) Longest(src, dest int) (BestPath, error) {
 	return g.evaluate(src, dest, false)
 }
@@ -148,11 +148,11 @@ func (g *Graph) finally(src, dest int) (BestPath, error) {
 	return g.bestPath(src, dest), nil
 }
 
-//BestPath contains the solution of the most optimal path
+// BestPath contains the solution of the most optimal path
 type BestPath struct {
 	Distance int64
 	Path     []int
 }
 
-//BestPaths contains the list of best solutions
+// BestPaths contains the list of best solutions
 type BestPaths []BestPath

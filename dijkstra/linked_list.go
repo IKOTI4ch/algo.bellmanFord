@@ -74,7 +74,7 @@ func (l *linkedList) front() *element {
 	return l.root.next
 }
 
-//popFront pops the Vertex off the front of the list
+// popFront pops the Vertex off the front of the list
 func (l *linkedList) popFront() *Vertex {
 	e := l.front()
 	if e.list == l {
@@ -85,7 +85,7 @@ func (l *linkedList) popFront() *Vertex {
 	return e.Value
 }
 
-//popFront pops the Vertex off the front of the list
+// popFront pops the Vertex off the front of the list
 func (l *linkedList) popBack() *Vertex {
 	e := l.back()
 	if e.list == l {
@@ -111,7 +111,7 @@ func (l *linkedList) lazyinit() {
 	}
 }
 
-//pushOrdered pushes the value into the linked list in the correct position
+// pushOrdered pushes the value into the linked list in the correct position
 // (ascending)
 func (l *linkedList) pushOrdered(v *Vertex) *element {
 	l.lazyinit()
