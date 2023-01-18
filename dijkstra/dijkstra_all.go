@@ -39,7 +39,8 @@ func (g *Graph) postSetupEvaluateAll(src, dest int, limit int64, shortest bool) 
 				(current.distance+dist == g.Verticies[v].distance && !g.Verticies[v].containsBest(current.ID)) ||
 				(len(g.Verticies[dest].bestVerticies) < int(limit) && !g.Verticies[current.ID].containsBest(v)) {
 				//if g.Verticies[v].bestVertex == current.ID && g.Verticies[v].ID != dest {
-				if current.containsBest(v) && g.Verticies[v].ID != dest {
+				//FIXME [0][1]&[1][0] error
+				if current.containsBest(v) {
 					//also only do this if we aren't checkout out the best distance again
 					//This seems familiar 8^)
 					return BestPaths{}, newErrLoop(current.ID, v)
