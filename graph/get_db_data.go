@@ -26,9 +26,11 @@ func GetDBData(rows pgx.Rows) (nodes map[string]int, edges [][2]string) {
 			panic(err)
 		}
 
-		nodes[dbPair.Token1ID] = 0
-		nodes[dbPair.Token2ID] = 0
-		edges = append(edges, [2]string{dbPair.Token1ID, dbPair.Token2ID})
+		if nodes[dbPair.Token1ID] == 0 || nodes[dbPair.Token2ID] == 0 {
+			nodes[dbPair.Token1ID] = -1
+			nodes[dbPair.Token2ID] = -1
+			edges = append(edges, [2]string{dbPair.Token1ID, dbPair.Token2ID})
+		}
 
 		bar.Increment()
 	}
