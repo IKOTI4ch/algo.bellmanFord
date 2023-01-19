@@ -37,7 +37,7 @@ func (g *Graph) postSetupEvaluateAll(src, dest int, limit int64, shortest bool) 
 			if (shortest && current.distance+dist < g.Verticies[v].distance) ||
 				(!shortest && current.distance+dist > g.Verticies[v].distance) ||
 				(current.distance+dist == g.Verticies[v].distance && !g.Verticies[v].containsBest(current.ID)) ||
-				(len(g.Verticies[dest].bestVerticies) < int(limit) && !g.Verticies[current.ID].containsBest(v)) {
+				(len(g.Verticies[dest].bestVerticies) < int(limit) && !current.containsBest(v)) { //TODO
 				//if g.Verticies[v].bestVertex == current.ID && g.Verticies[v].ID != dest {
 				//FIXME [0][1]&[1][0] error
 				if current.containsBest(v) {
@@ -47,7 +47,8 @@ func (g *Graph) postSetupEvaluateAll(src, dest int, limit int64, shortest bool) 
 				}
 
 				if current.distance+dist == g.Verticies[v].distance ||
-					((current.ID == dest || v == dest) && g.Verticies[dest].distance <= limit) {
+					((current.ID == dest || v == dest) && (g.Verticies[dest].distance <= limit)) {
+					//if current.distance+dist == g.Verticies[v].distance {
 					//At this point we know it's not in the list due to initial check
 					g.Verticies[v].bestVerticies = append(g.Verticies[v].bestVerticies, current.ID)
 				} else {
@@ -57,8 +58,9 @@ func (g *Graph) postSetupEvaluateAll(src, dest int, limit int64, shortest bool) 
 
 				if v == dest {
 					g.visitedDest = true
-					g.best = current.distance + dist
-
+					g.best = limit
+					tmp := g.Verticies[dest] //TODO
+					tmp = tmp
 					continue
 					//If this is the destination update best, so we can stop looking at
 					// useless Verticies
@@ -81,11 +83,13 @@ func (g *Graph) bestPaths(src, dest int) BestPaths {
 	paths := g.visitPath(src, dest, dest)
 	best := BestPaths{}
 
-	for indexPaths := range paths {
+	for indexPaths, _ := range paths {
 		for i, j := 0, len(paths[indexPaths])-1; i < j; i, j = i+1, j-1 {
 			paths[indexPaths][i], paths[indexPaths][j] = paths[indexPaths][j], paths[indexPaths][i]
 		}
 
+		//TODO remove the calculate a distance by path length
+		//best = append(best, BestPath{int64(len(path) - 1), paths[indexPaths]})
 		best = append(best, BestPath{g.Verticies[dest].distance, paths[indexPaths]})
 	}
 
@@ -101,7 +105,8 @@ func (g *Graph) visitPath(src, dest, currentNode int) [][]int {
 
 	paths := [][]int{}
 	for _, vertex := range g.Verticies[currentNode].bestVerticies {
-		sps := g.visitPath(src, dest, int(vertex))
+		//TODO create the dest path of distances
+		sps := g.visitPath(src, dest, vertex)
 		for i := range sps {
 			paths = append(paths, append([]int{currentNode}, sps[i]...))
 		}

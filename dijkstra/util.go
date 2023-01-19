@@ -92,7 +92,7 @@ func Import(filename string) (g Graph, err error) {
 
 // ExportToFile exports the verticies to file currently does not take into account
 // mappings (from string to int)
-func (g Graph) ExportToFile(filename string) error {
+func (g *Graph) ExportToFile(filename string) error {
 	var i string
 	var err error
 	os.MkdirAll(filename, 0777)

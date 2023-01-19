@@ -50,7 +50,7 @@ func (g *Graph) GetVertex(ID int) (*Vertex, error) {
 	return &g.Verticies[ID], nil
 }
 
-func (g Graph) validate() error {
+func (g *Graph) validate() error {
 	for _, v := range g.Verticies {
 		for a := range v.arcs {
 			if a >= len(g.Verticies) || (g.Verticies[a].ID == 0 && a != 0) {

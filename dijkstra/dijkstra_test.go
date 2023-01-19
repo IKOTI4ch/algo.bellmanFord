@@ -292,7 +292,7 @@ func benchmarkRCall(b *testing.B, filename string) {
 	//====RESET TIMER BEFORE LOOP====
 	b.ResetTimer()
 	for i := 0; i < b.N; i++ {
-		graph.ShortestAll(src, dest)
+		graph.ShortestAll(src, dest, 1)
 	}
 }
 
@@ -343,11 +343,11 @@ func testSolution(t *testing.T, best BestPath, wanterr error, filename string, f
 	testResults(t, got, best, shortest, filename)
 	if list >= 0 {
 		graph.setup(shortest, from, list)
-		gotAll, err = graph.postSetupEvaluateAll(from, to, shortest)
+		gotAll, err = graph.postSetupEvaluateAll(from, to, 1, shortest)
 	} else if shortest {
-		gotAll, err = graph.ShortestAll(from, to)
+		gotAll, err = graph.ShortestAll(from, to, 1)
 	} else {
-		gotAll, err = graph.LongestAll(from, to)
+		gotAll, err = graph.LongestAll(from, to, 1)
 	}
 	testErrors(t, wanterr, err, filename)
 	if len(gotAll) == 0 {
@@ -360,9 +360,9 @@ func testGraphSolutionAll(t *testing.T, best BestPaths, wanterr error, graph Gra
 	var err error
 	var gotAll BestPaths
 	if shortest {
-		gotAll, err = graph.ShortestAll(from, to)
+		gotAll, err = graph.ShortestAll(from, to, 1)
 	} else {
-		gotAll, err = graph.LongestAll(from, to)
+		gotAll, err = graph.LongestAll(from, to, 1)
 	}
 	testErrors(t, wanterr, err, "From graph")
 	if len(gotAll) == 0 {
