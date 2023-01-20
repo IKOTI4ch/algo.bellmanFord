@@ -59,8 +59,6 @@ func (g *Graph) postSetupEvaluateAll(src, dest int, limit int64, shortest bool) 
 				if v == dest {
 					g.visitedDest = true
 					g.best = limit
-					tmp := g.Verticies[dest] //TODO
-					tmp = tmp
 					continue
 					//If this is the destination update best, so we can stop looking at
 					// useless Verticies
@@ -83,7 +81,7 @@ func (g *Graph) bestPaths(src, dest int) BestPaths {
 	paths := g.visitPath(src, dest, dest)
 	best := BestPaths{}
 
-	for indexPaths, _ := range paths {
+	for indexPaths := range paths {
 		for i, j := 0, len(paths[indexPaths])-1; i < j; i, j = i+1, j-1 {
 			paths[indexPaths][i], paths[indexPaths][j] = paths[indexPaths][j], paths[indexPaths][i]
 		}
